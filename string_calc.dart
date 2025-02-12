@@ -3,19 +3,28 @@
  */
 
 void main() {
-  String input = "12";
+  // An input string of comma-separated numbers
+  String input = "1\n5,5";
   int output = add(input);
   print('Input: $input');
   print('Output: $output');
 }
 
+/**
+ * Function to calculate sum of given numbers
+ */
 int add(String numbers) {
   int sum = 0;
-  if (numbers == "")
+  final re = RegExp(r'[,\n]');
+  List<String> nums = numbers.split(re);
+  if (nums.length == 0)
     return 0;
+  else if (nums.length == 1)
+    return int.parse(nums[0]);
   else {
-    List<String> nums = numbers.split(",");
-    if (nums.length == 1) return int.parse(nums[0]);
+    for (String n in nums) {
+      sum += int.parse(n);
+    }
   }
   return sum;
 }
